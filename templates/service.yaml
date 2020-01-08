@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nodejs-sample-app-chart.fullname" . }}
+  labels:
+    {{- include "nodejs-sample-app-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.targetPort }}
+  selector:
+    {{- include "nodejs-sample-app-chart.selectorLabels" . | nindent 4 }}
